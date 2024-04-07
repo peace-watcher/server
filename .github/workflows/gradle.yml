@@ -26,10 +26,10 @@ jobs:
     # create application.yml
     - name: create application.yml
       run: |
-        pwd
+        mkdir ./src/main/resources
         cd ./src/main/resources
-        touch ./application.yml
-        echo "${{ secrets.APPLICATION_FILE }}" > ./application.yml
+        touch ./application.properties
+        echo "${{ secrets.APPLICATION_FILE }}" > ./application.properties
       shell: bash
    
     # grant permisson
@@ -48,22 +48,22 @@ jobs:
         
     - name: Docker image build
       run: |
-        docker build -t ${{ secrets.DOCKER_USERNAME }}/pre-docker .
+        docker build -t ${{ secrets.DOCKER_USERNAME }}/peacewatcher-docker .
       
     - name: Docker Hub push
-      run: docker push ${{ secrets.DOCKER_USERNAME }}/pre-docker
+      run: docker push ${{ secrets.DOCKER_USERNAME }}/peacewatcher-docker
 
     # Deploy
     - name: Deploy to Instance
       uses: appleboy/ssh-action@master
       with:
-        host: ${{ secrets.HOST }}
-        username: ${{ secrets.USERNAME }}
-        key: ${{ secrets.SSH_KEY }}  
+        host: ${{ secrets.HOST }}    #EC2 HOST
+        username: ${{ secrets.USERNAME }}    #AWS_USERNAME
+        key: ${{ secrets.SSH_KEY }}    #AWS PEM KEY
         script: |
           docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-          docker pull ${{ secrets.DOCKER_USERNAME }}/pre-docker
+          docker pull ${{ secrets.DOCKER_USERNAME }}/peacewatcher-docker
           docker stop $(docker ps -qa)
-          docker run -d -p 80:80 ${{ secrets.DOCKER_USERNAME }}/pre-docker
+          docker run -d -p 80:80 ${{ secrets.DOCKER_USERNAME }}/peacewatcher-docker
           docker rm $(docker ps --filter 'status=exited' -qa)
           docker image prune -f
