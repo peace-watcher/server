@@ -23,8 +23,8 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
     
-    # create application.yml
-    - name: create application.yml
+    # create application.properties
+    - name: create application.properties
       run: |
         mkdir ./src/main/resources
         cd ./src/main/resources
