@@ -5,7 +5,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.peacewatcher.peacewatcher.Dto.FcmMessageDto;
 import com.peacewatcher.peacewatcher.Dto.FcmSendDto;
+import com.peacewatcher.peacewatcher.Entity.DeviceToken;
+import com.peacewatcher.peacewatcher.Repository.DeviceTokenRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.*;
@@ -25,6 +28,8 @@ public class FcmService {
     @Value("${firebase.config-path}")
     private String FIREBASE_CONFIG_PATH;
 
+    @Autowired
+    private final DeviceTokenRepository deviceTokenRepository;
 
     //앱으로 푸시 알림 보내기
     //메시지를 구성하고 토큰을 받아서 FCM으로 메시지 처리를 수행
@@ -39,6 +44,7 @@ public class FcmService {
 
         HttpEntity entity = new HttpEntity<>(message, headers);
 
+        //나중에 보안 처리하기
         String API_URL = "<https://fcm.googleapis.com/v1/projects/adjh54-a0189/messages:send>";
         ResponseEntity response = restTemplate.exchange(API_URL, HttpMethod.POST, entity, String.class);
 
@@ -70,9 +76,14 @@ public class FcmService {
      */
     public String makeMessage(FcmSendDto fcmSendDto) throws JsonProcessingException {
         ObjectMapper om = new ObjectMapper();
+
+        DeviceToken deviceToken = deviceTokenRepository.findById(1);
+
+        String token = deviceToken.getDeviceToken();
+
         FcmMessageDto fcmMessageDto = FcmMessageDto.builder()
                 .message(FcmMessageDto.Message.builder()
-                        .token(fcmSendDto.getToken())
+                        .token(token)
                         .notification(FcmMessageDto.Notification.builder()
                                 .title(fcmSendDto.getTitle())
                                 .body(fcmSendDto.getBody())
