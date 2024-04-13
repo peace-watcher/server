@@ -22,13 +22,17 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
     
-    # create application.properties
+    # create application.properties, firebase
     - name: create application.properties
       run: |
         mkdir ./src/main/resources
         cd ./src/main/resources
         touch ./application.properties
         echo "${{ secrets.APPLICATION_FILE }}" > ./application.properties
+        mkdir ./firebase
+        cd ./firebase
+        touch ./peace-watcher-firebase-adminsdk-h2ae7-8d4a545043.json
+        echo "${{ secrets.FIREBASE_FILE }}" > ./peace-watcher-firebase-adminsdk-h2ae7-8d4a545043.json
       shell: bash
    
     # grant permisson
