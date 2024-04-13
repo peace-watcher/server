@@ -70,3 +70,4 @@ jobs:
           docker run -d -p 80:80 ${{ secrets.DOCKER_USERNAME }}/peacewatcher-docker
           docker rm $(docker ps --filter 'status=exited' -qa)
           docker image prune -f
+
