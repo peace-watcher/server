@@ -1,5 +1,6 @@
 name: Deploy
 
+
 on:
   push:
     branches: [ "main" ]
@@ -67,6 +68,6 @@ jobs:
           docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
           docker pull ${{ secrets.DOCKER_USERNAME }}/peacewatcher-docker
           docker stop $(docker ps -qa)
-          docker run -d -p 80:80 ${{ secrets.DOCKER_USERNAME }}/peacewatcher-docker
+          docker run -d -p 8080:8080 ${{ secrets.DOCKER_USERNAME }}/peacewatcher-docker
           docker rm $(docker ps --filter 'status=exited' -qa)
           docker image prune -f
