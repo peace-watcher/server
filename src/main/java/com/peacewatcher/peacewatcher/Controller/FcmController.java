@@ -25,10 +25,10 @@ public class FcmController {
     private final DeviceTokenService deviceTokenService;
 
     @PostMapping("/send")
-    public ResponseEntity<Object> pushMessage(@RequestBody @Validated FcmSendDto fcmSendDto) throws IOException {
+    public ResponseEntity<Object> pushMessage() throws IOException {
         //log.debug("[+] 푸시 메시지를 전송합니다. ");
         //System.out.println(fcmSendDto.getToken() + " " + fcmSendDto.getTitle() + " " + fcmSendDto.getBody());
-        int result = fcmService.sendMessageTo(fcmSendDto);
+        int result = fcmService.sendMessageTo();
 
         // 응답으로 보낼 데이터 설정
         Map<String, Object> responseData = new HashMap<>();

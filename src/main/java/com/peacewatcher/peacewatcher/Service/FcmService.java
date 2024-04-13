@@ -33,9 +33,9 @@ public class FcmService {
 
     //앱으로 푸시 알림 보내기
     //메시지를 구성하고 토큰을 받아서 FCM으로 메시지 처리를 수행
-    public int sendMessageTo(FcmSendDto fcmSendDto) throws IOException {
+    public int sendMessageTo() throws IOException {
 
-        String message = makeMessage(fcmSendDto);
+        String message = makeMessage();
         RestTemplate restTemplate = new RestTemplate();
 
         HttpHeaders headers = new HttpHeaders();
@@ -71,13 +71,12 @@ public class FcmService {
     /**
      * FCM 전송 정보를 기반으로 메시지를 구성합니다. (Object -> String)
      *
-     * @param fcmSendDto FcmSendDto
      * @return String
      */
-    public String makeMessage(FcmSendDto fcmSendDto) throws JsonProcessingException {
+    public String makeMessage() throws JsonProcessingException {
         ObjectMapper om = new ObjectMapper();
 
-        DeviceToken deviceToken = deviceTokenRepository.findById(1);
+        DeviceToken deviceToken = deviceTokenRepository.findById(2);
 
         String token = deviceToken.getDeviceToken();
 
@@ -85,8 +84,8 @@ public class FcmService {
                 .message(FcmMessageDto.Message.builder()
                         .token(token)
                         .notification(FcmMessageDto.Notification.builder()
-                                .title(fcmSendDto.getTitle())
-                                .body(fcmSendDto.getBody())
+                                .title("흉기난동발생")
+                                .body("흉기난동발생")
                                 .image(null)
                                 .build()
                         ).build()).validateOnly(false).build();
