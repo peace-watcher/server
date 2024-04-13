@@ -19,9 +19,10 @@ public class FCMConfig {
     @Value("${firebase.key-path}")
     private String keyPath;
 
+
     @Bean
     FirebaseMessaging firebaeMessaging() throws IOException {
-        ClassPathResource resource = new ClassPathResource("firebase/" + keyPath);
+        ClassPathResource resource = new ClassPathResource("firebase/peace-watcher-firebase-adminsdk-h2ae7-8d4a545043.json");
 
         InputStream refreshToken = resource.getInputStream();
 

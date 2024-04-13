@@ -1,6 +1,8 @@
 package com.peacewatcher.peacewatcher.Controller;
 
+import com.peacewatcher.peacewatcher.Dto.DeviceTokenDto;
 import com.peacewatcher.peacewatcher.Dto.FcmSendDto;
+import com.peacewatcher.peacewatcher.Service.DeviceTokenService;
 import com.peacewatcher.peacewatcher.Service.FcmService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,11 +22,12 @@ import java.util.Map;
 public class FcmController {
 
     private final FcmService fcmService;
+    private final DeviceTokenService deviceTokenService;
 
     @PostMapping("/send")
     public ResponseEntity<Object> pushMessage(@RequestBody @Validated FcmSendDto fcmSendDto) throws IOException {
         //log.debug("[+] 푸시 메시지를 전송합니다. ");
-        System.out.println(fcmSendDto.getToken() + " " + fcmSendDto.getTitle() + " " + fcmSendDto.getBody());
+        //System.out.println(fcmSendDto.getToken() + " " + fcmSendDto.getTitle() + " " + fcmSendDto.getBody());
         int result = fcmService.sendMessageTo(fcmSendDto);
 
         // 응답으로 보낼 데이터 설정
@@ -36,14 +39,9 @@ public class FcmController {
     }
 
 
-/*
-    @PostMapping("")
-    public String pushNotification(@RequestBody FCMTestRequestDto request){
-        try{
-        }
-
+    @PostMapping("/add")
+    public void pushNotification(@RequestBody DeviceTokenDto request){
+        deviceTokenService.addToken(request);
     }
- */
-
 
 }
