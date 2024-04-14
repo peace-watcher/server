@@ -80,8 +80,8 @@ public class FcmService {
                 .message(FcmMessageDto.Message.builder()
                         .token(token)
                         .notification(FcmMessageDto.Notification.builder()
-                                .title("흉기난동발생")
-                                .body("흉기난동발생")
+                                .title("흉기 난동 발생")
+                                .body("사용자 위치 반경 2km 내 [신촌동] 에서 흉기 난동 발생")
                                 .image(null)
                                 .build()
                         ).build()).validateOnly(false).build();
