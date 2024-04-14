@@ -15,12 +15,12 @@ import java.io.InputStream;
 public class FcmInitializer {
 
     @Value("${firebase.key-path}")
-    String fcmKeyPath;
+    String FIREBASE_KEY_PATH;
 
     @PostConstruct
     public void getFcmCredential(){
         try {
-            InputStream refreshToken = new ClassPathResource("firebase/peace-watcher-firebase-adminsdk-h2ae7-8d4a545043.json").getInputStream();
+            InputStream refreshToken = new ClassPathResource(FIREBASE_KEY_PATH).getInputStream();
 
             FirebaseOptions options = FirebaseOptions.builder()
                     .setCredentials(GoogleCredentials.fromStream(refreshToken)).build();
