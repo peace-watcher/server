@@ -30,6 +30,7 @@ jobs:
         cd ./src/main/resources
         touch ./application.properties
         echo "${{ secrets.APPLICATION_FILE }}" > ./application.properties
+        mkdir ./firebase
       shell: bash
 
     # create JSON file
