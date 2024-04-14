@@ -38,7 +38,7 @@ jobs:
       id: create-json
       uses: jsdaniell/create-json@v1.2.2
       with:
-        name: "peace-watcher-firebase.json"
+        name: "peace-watcher-firebase-adminsdk-h2ae7-8d4a545043.json"
         json: ${{ secrets.FIREBASE_FILE }}
         dir: 'src/main/resources/firebase/'
 

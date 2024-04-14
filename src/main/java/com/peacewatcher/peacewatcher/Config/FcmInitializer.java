@@ -20,7 +20,7 @@ public class FcmInitializer {
     @PostConstruct
     public void getFcmCredential(){
         try {
-            InputStream refreshToken = new ClassPathResource("firebase/peace-watcher-firebase.json").getInputStream();
+            InputStream refreshToken = new ClassPathResource("firebase/peace-watcher-firebase-adminsdk-h2ae7-8d4a545043.json").getInputStream();
 
             FirebaseOptions options = FirebaseOptions.builder()
                     .setCredentials(GoogleCredentials.fromStream(refreshToken)).build();

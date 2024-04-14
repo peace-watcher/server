@@ -52,7 +52,7 @@ public class FcmService {
 
     //Firebase Admin SDK의 비공개 키를 참조하여 Bearer 토큰을 발급
     public String getAccessToken() throws IOException {
-        String firebaseConfigPath = "firebase/peace-watcher-firebase.json";
+        String firebaseConfigPath = "firebase/peace-watcher-firebase-adminsdk-h2ae7-8d4a545043.json";
 
         GoogleCredentials googleCredentials = GoogleCredentials
                 .fromStream(new ClassPathResource(firebaseConfigPath).getInputStream())
