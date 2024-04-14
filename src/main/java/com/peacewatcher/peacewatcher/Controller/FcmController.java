@@ -1,19 +1,15 @@
 package com.peacewatcher.peacewatcher.Controller;
 
 import com.peacewatcher.peacewatcher.Dto.DeviceTokenDto;
-import com.peacewatcher.peacewatcher.Dto.FcmSendDto;
 import com.peacewatcher.peacewatcher.Service.DeviceTokenService;
 import com.peacewatcher.peacewatcher.Service.FcmService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
+import okhttp3.Response;
 import org.springframework.web.bind.annotation.*;
 
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 @Slf4j
 @RestController
@@ -25,19 +21,15 @@ public class FcmController {
     private final DeviceTokenService deviceTokenService;
 
     @PostMapping("/send")
-    public ResponseEntity<Object> pushMessage() throws IOException {
-        log.debug("[+] 푸시 메시지를 전송합니다. ");
-        //System.out.println(fcmSendDto.getToken() + " " + fcmSendDto.getTitle() + " " + fcmSendDto.getBody());
-        int result = fcmService.sendMessageTo();
+    public String pushMessage() throws IOException {
+        try {
+            Response response = fcmService.sendMessageTo();
+            return response.body().string();
+        } catch (IOException e){
+            throw new RuntimeException();
+        }
 
-        // 응답으로 보낼 데이터 설정
-        Map<String, Object> responseData = new HashMap<>();
-        responseData.put("result", result);
-
-        // 응답 반환
-        return ResponseEntity.ok(responseData);
     }
-
 
     @PostMapping("/add")
     public void pushNotification(@RequestBody DeviceTokenDto request){
