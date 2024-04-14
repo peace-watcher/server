@@ -22,13 +22,8 @@ public class FcmController {
 
     @PostMapping("/send")
     public String pushMessage() throws IOException {
-        try {
-            Response response = fcmService.sendMessageTo();
-            return response.body().string();
-        } catch (IOException e){
-            throw new RuntimeException();
-        }
-
+        Response response = fcmService.sendMessageTo();
+        return response.body().string();
     }
 
     @PostMapping("/add")

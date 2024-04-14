@@ -68,9 +68,10 @@ public class FcmService {
     public String makeMessage() throws JsonProcessingException {
         ObjectMapper om = new ObjectMapper();
 
-        DeviceToken deviceToken = deviceTokenRepository.findById(17);
+        //DeviceToken deviceToken = deviceTokenRepository.findById(55);
+        //String token = deviceToken.getDeviceToken();
 
-        String token = deviceToken.getDeviceToken();
+        String token = deviceTokenRepository.findByLastToken();
 
         //토큰 확인 테스트
         System.out.println(token);
