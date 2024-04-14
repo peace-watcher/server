@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.peacewatcher.peacewatcher.Dto.FcmMessageDto;
-import com.peacewatcher.peacewatcher.Entity.DeviceToken;
 import com.peacewatcher.peacewatcher.Repository.DeviceTokenRepository;
 import lombok.RequiredArgsConstructor;
 import okhttp3.*;
@@ -25,7 +24,7 @@ public class FcmService {
     @Value("${firebase.api-url}")
     private String api_url;
 
-    @Value("${firebase.config-path}")
+    @Value("${firebase.key-path}")
     private String FIREBASE_CONFIG_PATH;
 
     @Autowired
@@ -53,7 +52,7 @@ public class FcmService {
 
     //Firebase Admin SDK의 비공개 키를 참조하여 Bearer 토큰을 발급
     public String getAccessToken() throws IOException {
-        String firebaseConfigPath = "firebase/peace-watcher-firebase-adminsdk-h2ae7-8d4a545043.json";
+        String firebaseConfigPath = "firebase/peace-watcher-firebase.json";
 
         GoogleCredentials googleCredentials = GoogleCredentials
                 .fromStream(new ClassPathResource(firebaseConfigPath).getInputStream())
@@ -67,9 +66,6 @@ public class FcmService {
     //보낼 메세지 만들기
     public String makeMessage() throws JsonProcessingException {
         ObjectMapper om = new ObjectMapper();
-
-        //DeviceToken deviceToken = deviceTokenRepository.findById(55);
-        //String token = deviceToken.getDeviceToken();
 
         String token = deviceTokenRepository.findByLastToken();
 
