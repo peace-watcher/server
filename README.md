@@ -16,7 +16,7 @@ Peace Watcher Backend 레포지토리입니다.<br><br>
 
 2. Set environment variable<br>
 - Add `src/main/resources/firebase/{firebase.json file}`<br><br>
-  [**Firebase Console**](https://console.firebase.google.com/u/0/?hl=ko) 에서 `새 비공개 키 생성` 후 해당 파일 `src/main/resources/firebase/` 에 추가하기
+  [**Firebase Console**](https://console.firebase.google.com/u/0/?hl=ko) 에서 프로젝트 생성 후, `새 비공개 키 생성` 버튼을 눌러 파일 생성하여 해당 파일 `src/main/resources/firebase/` 에 추가하기
   ![image](https://github.com/peace-watcher/server/assets/121746871/16809598-f05f-44d6-9af3-d24592922753)
   
 - Add `src/main/resources/application.properties`
