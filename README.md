@@ -43,4 +43,7 @@ Peace Watcher Backend 레포지토리입니다.<br><br>
 
 
 ## 📚 Open Source Projects Used
-- Firebase Cloud Message 로 푸시 알림 구현
+### 1. Firebase Cloud Messaging
+  - 모바일 및 웹 애플리케이션에 푸시 알림을 전송하는 데 사용되는 크로스 플랫폼 메시징 솔루션
+  - 안드로이드, iOS, 웹을 포함한 여러 플랫폼에서 작동하여, 다양한 디바이스에서 메시징 기능 통합 가능
+  - Firebase의 무료 서비스로 제공되어, 개발자는 별도의 비용 없이 메시징 기능을 구현 가능
