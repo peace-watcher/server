@@ -43,4 +43,4 @@ Peace Watcher Backend 레포지토리입니다.<br><br>
 
 
 ## 📚 Open Source Projects Used
-1. Firebase Cloud Message 로 푸시 알림 구현
+- Firebase Cloud Message 로 푸시 알림 구현
