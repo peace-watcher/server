@@ -3,7 +3,7 @@ Peace Watcher Backend 레포지토리입니다.<br><br>
 ## 🪧 About Source Code
 ### 👩‍💻Tech Stack
 - Java 17
-- Spring Boot 3.2.0
+- Spring Boot 3.2.4
 - MySQL 8.0.35
 - Docker
 
